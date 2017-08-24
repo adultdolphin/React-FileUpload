@@ -381,7 +381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (this.timeout) {
 	            xhr.timeout = this.timeout;
 	            xhr.ontimeout = function () {
-	                _this2.uploadError({ type: 'TIMEOUTERROR', message: 'timeout' });
+	                _this2.uploadError({ type: 'TIMEOUTERROR', message: 'timeout' }, mill);
 	                scope.isTimeout = false;
 	            };
 	            scope.isTimeout = false;
@@ -403,16 +403,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	            } catch (e) {
 	                /*超时抛出不一样的错误，不在这里处理*/
-	                !scope.isTimeout && _this2.uploadError({ type: 'FINISHERROR', message: e.message });
+	                !scope.isTimeout && _this2.uploadError({ type: 'FINISHERROR', message: e.message }, mill);
 	            }
 	        };
 	        /*xhr error*/
 	        xhr.onerror = function () {
 	            try {
 	                var resp = _this2.dataType == 'json' ? JSON.parse(xhr.responseText) : xhr.responseText;
-	                _this2.uploadError({ type: 'XHRERROR', message: resp });
+	                _this2.uploadError({ type: 'XHRERROR', message: resp }, mill);
 	            } catch (e) {
-	                _this2.uploadError({ type: 'XHRERROR', message: e.message });
+	                _this2.uploadError({ type: 'XHRERROR', message: e.message }, mill);
 	            }
 	        };
 	        /*这里部分浏览器实现不一致，而且IE没有这个方法*/
@@ -525,7 +525,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            try {
 	                that.uploadSuccess(that.IECallback(that.dataType, partIEID));
 	            } catch (e) {
-	                that.uploadError(e);
+	                that.uploadError(e, mill);
 	            } finally {
 	                /*清除输入框的值*/
 	                var oInput = document.getElementById('ajax_upload_hidden_input_' + that.IETag + partIEID);
