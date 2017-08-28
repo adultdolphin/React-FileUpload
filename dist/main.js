@@ -294,6 +294,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.chooseAndUpload && this.commonUpload();
 	    },
 
+      clearFileInput: function() {
+        this.refs['ajax_upload_file_input'].value = '';
+      },
 
 	    /*执行上传*/
 	    commonUpload: function commonUpload() {
